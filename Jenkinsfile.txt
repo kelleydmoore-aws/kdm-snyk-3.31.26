@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = 'us-east-1'
+        AWS_DEFAULT_REGION = 'us-east-2'
         TF_IN_AUTOMATION   = 'true'
         SNYK_ORG           = credentials('snyk-org-slug')
     }
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-iam-user-creds'
+                    credentialsId: 'b307e5d6-3678-450b-9102-28fa4e5e6dc2'
                 ]]) {
                     sh 'terraform init'
                 }
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-iam-user-creds'
+                    credentialsId: 'b307e5d6-3678-450b-9102-28fa4e5e6dc2'
                 ]]) {
                     sh 'terraform plan'
                 }
@@ -78,7 +78,7 @@ pipeline {
                     if (destroyChoice == 'yes') {
                         withCredentials([[
                             $class: 'AmazonWebServicesCredentialsBinding',
-                            credentialsId: 'aws-iam-user-creds'
+                            credentialsId: 'b307e5d6-3678-450b-9102-28fa4e5e6dc2'
                         ]]) {
                             sh 'terraform destroy -auto-approve'
                         }
